@@ -5,9 +5,11 @@
   Приложение представляет собой платформу для поиска, которая включает следуюшие экраны: экран для указания города и экран со списком станций для выбранного города.
 </p>
 
+<h1 align="center" id="title">Макеты экранов</h1>
+
 <img src="https://gdurl.com/Mvcy" alt="project-screenshot" width="200" height="400/"> <img src="https://gdurl.com/uq5u" alt="project-screenshot" width="200" height="400/"> <img src="https://gdurl.com/8bkt" alt="project-screenshot" width="200" height="400/">
 
-<h2>Экран авторизации пользователя</h2>
+<h2>Экран выбора города и экран со списком станций</h2>
 
 <table>
   <tr>
