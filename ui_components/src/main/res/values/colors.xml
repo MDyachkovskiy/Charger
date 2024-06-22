@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blue">#3364E0</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="charge_busy">#FFB3B3</color>
+    <color name="charge_free">#B3FFB3</color>
+</resources>

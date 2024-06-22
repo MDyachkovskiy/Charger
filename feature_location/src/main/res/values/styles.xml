@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Style.InputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="shapeAppearanceOverlay">@style/Style.RuGuide.Rounded</item>
+        <item name="android:textColorHint">?android:textColorSecondary</item>
+        <item name="startIconTint">?android:textColorSecondary</item>
+        <item name="hintTextAppearance">@style/Style.InputLayout.Hint</item>
+        <item name="backgroundTint">?attr/colorSurface</item>
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxCollapsedPaddingTop">0dp</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+    </style>
+
+    <style name="Style.InputLayout.Hint" parent="TextAppearance.AppCompat">
+        <item name="fontFamily">@font/sf_pro_display_regular</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="Style.RuGuide.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">9dp</item>
+    </style>
+
+    <style name="Style.ImageButton.Round.Surface" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@drawable/bg_round_ripple</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+</resources>

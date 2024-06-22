@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search"
+        style="@style/Style.InputLayout"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        app:expandedHintEnabled="true"
+        app:layout_constraintEnd_toEndOf="@id/search_barrier"
+        app:layout_constraintStart_toStartOf="@id/left"
+        app:layout_constraintTop_toTopOf="parent"
+        app:placeholderTextColor="?android:textColorPrimary"
+        app:startIconDrawable="@drawable/ic_search">
+
+        <AutoCompleteTextView
+            android:id="@+id/search_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:inputType="text"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="17sp"
+            android:popupBackground="@android:color/white"
+            tools:ignore="LabelFor" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/close"
+        style="@style/Style.ImageButton.Round.Surface"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_close"
+        android:tint="?android:textColorSecondary"
+        app:layout_constraintBottom_toBottomOf="@id/search"
+        app:layout_constraintEnd_toEndOf="@id/right"
+        app:layout_constraintTop_toTopOf="@id/search" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/search_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="close" />
+
+    <View
+        android:id="@+id/action_button"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/blue_background"
+        app:layout_constraintEnd_toEndOf="@id/search_barrier"
+        app:layout_constraintStart_toStartOf="@id/left"
+        app:layout_constraintTop_toBottomOf="@id/search" />
+
+    <TextView
+        android:id="@+id/button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/sf_pro_display_medium"
+        android:gravity="center"
+        android:text="Показать станции"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/action_button"
+        app:layout_constraintEnd_toEndOf="@+id/action_button"
+        app:layout_constraintStart_toStartOf="@+id/action_button"
+        app:layout_constraintTop_toTopOf="@+id/action_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

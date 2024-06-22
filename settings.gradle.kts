@@ -15,4 +15,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Charger"
 include(":app")
- 
+include(":core")
+include(":feature_location")
+include(":feature_stations")
+include(":ui_components")
