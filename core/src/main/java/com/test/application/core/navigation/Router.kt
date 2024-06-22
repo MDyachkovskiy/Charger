@@ -10,11 +10,6 @@ class Router(
     private val containerId: Int
 ) {
     companion object {
-        fun createRouter(fragment: Fragment, containerId: Int): Router {
-            return Router(fragment.requireActivity(),fragment.childFragmentManager,
-                containerId)
-        }
-
         fun createRouter(activity: FragmentActivity, containerId: Int): Router {
             return Router(activity, activity.supportFragmentManager, containerId)
         }

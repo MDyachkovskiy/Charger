@@ -1,6 +1,5 @@
 package com.test.application.feature_stations.presentation
 
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -18,7 +17,6 @@ import javax.inject.Provider
 
 internal class StationsListViewModel @AssistedInject constructor(
     @Assisted private val router: Router,
-    @Assisted private val fragmentManager: FragmentManager,
     @Assisted private val selectedCity: String?,
     private val findsStationsUseCase: FindStationsUseCase
 ) : ViewModel() {
@@ -26,7 +24,6 @@ internal class StationsListViewModel @AssistedInject constructor(
     interface Factory {
         fun create(
             router: Router,
-            fragmentManager: FragmentManager,
             selectedCity: String?
         ): StationsListViewModel
     }
@@ -34,7 +31,6 @@ internal class StationsListViewModel @AssistedInject constructor(
     @Suppress("UNCHECKED_CAST")
     class StationsListViewModelFactory @AssistedInject constructor(
         @Assisted private val router: Router,
-        @Assisted private val fragmentManager: FragmentManager,
         @Assisted private val selectedCity: String?,
         private val provider: Provider<StationsListViewModel.Factory>
     ) : ViewModelProvider.Factory {
@@ -43,7 +39,6 @@ internal class StationsListViewModel @AssistedInject constructor(
         interface Factory {
             fun create(
                 router: Router,
-                fragmentManager: FragmentManager,
                 selectedCity: String?
             ): StationsListViewModelFactory
         }
@@ -51,7 +46,7 @@ internal class StationsListViewModel @AssistedInject constructor(
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return when (modelClass) {
                 StationsListViewModel::class.java -> provider.get()
-                    .create(router, fragmentManager, selectedCity)
+                    .create(router, selectedCity)
 
                 else -> throw IllegalArgumentException(
                     "Create ViewModel Error for ${modelClass.name}. " +
