@@ -24,9 +24,7 @@ internal class StationsListFragment: Fragment(), RouteProvider {
     lateinit var provider: Provider<StationsListViewModel.StationsListViewModelFactory.Factory>
     private val viewModel by viewModels<StationsListViewModel> {
         val selectedCity = arguments?.getSelectedCity()
-        provider.get().create(
-            router, parentFragmentManager, selectedCity
-        )
+        provider.get().create(router, selectedCity)
     }
 
     override val router: Router
