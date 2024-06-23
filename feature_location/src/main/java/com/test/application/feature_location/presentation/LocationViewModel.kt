@@ -1,13 +1,14 @@
 package com.test.application.feature_location.presentation
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.test.application.core.api.stations_list.StationsListProvider
 import com.test.application.core.navigation.Router
 import com.test.application.core.view.DataState
 import com.test.application.feature_location.domain.model.City
 import com.test.application.feature_location.domain.usecase.FindLocationUseCase
+import com.test.application.ui_components.base_classes.BaseViewModel
+import com.test.application.ui_components.base_classes.BaseViewModelFactory
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -30,7 +31,7 @@ internal class LocationViewModel @AssistedInject constructor(
     @Assisted private val router: Router,
     private val findLocationUseCase: FindLocationUseCase,
     private val stationsListProvider: StationsListProvider
-): ViewModel() {
+): BaseViewModel<List<City>>() {
 
     @AssistedFactory
     interface Factory {
@@ -42,7 +43,9 @@ internal class LocationViewModel @AssistedInject constructor(
     class LocationViewModelFactory @AssistedInject constructor(
         @Assisted private val router: Router,
         private val provider: Provider<LocationViewModel.Factory>
-    ) : ViewModelProvider.Factory {
+    ) : BaseViewModelFactory<LocationViewModel>({
+        provider.get().create(router)
+    }) {
 
         @AssistedFactory
         interface Factory {
@@ -52,10 +55,8 @@ internal class LocationViewModel @AssistedInject constructor(
         }
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return when(modelClass) {
-                LocationViewModel::class.java -> provider.get()
-                    .create(router)
-
+            return when (modelClass) {
+                LocationViewModel::class.java -> provider.get().create(router)
                 else -> throw IllegalArgumentException(
                     "Create ViewModel Error for ${modelClass.name}. " +
                             "ModelClass must be ${this.javaClass.name}"
@@ -66,9 +67,6 @@ internal class LocationViewModel @AssistedInject constructor(
 
     private val _query = MutableSharedFlow<String?>(replay = 1)
     val query: SharedFlow<String?> = _query
-
-    private val _locations = MutableStateFlow<DataState<List<City>>>(DataState.Loading())
-    val locations: StateFlow<DataState<List<City>>> = _locations
 
     private val _selectedCity = MutableStateFlow<City?>(null)
     val selectedCity: StateFlow<City?> = _selectedCity
@@ -87,10 +85,10 @@ internal class LocationViewModel @AssistedInject constructor(
                 .collect { result ->
                     result.fold(
                         onSuccess = {places ->
-                            _locations.value = DataState.Success(places)
+                            setSuccessState(places)
                         },
                         onFailure = {error ->
-                            _locations.value = DataState.Error(error)
+                            setErrorState(error)
                         }
                     )
                 }
@@ -104,7 +102,7 @@ internal class LocationViewModel @AssistedInject constructor(
     }
 
     fun updateSelectedCity(cityName: String) {
-        val city = _locations.value.let {
+        val city = _dataState.value.let {
             if (it is DataState.Success) {
                 it.data.find { city -> city.title == cityName }
             } else null
